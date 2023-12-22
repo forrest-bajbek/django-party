@@ -1,4 +1,6 @@
+crispy-bootstrap4==2023.1
 Django==4.2.7
+django-crispy-forms==2.1
 isort
 black
 pytest==7.4.3
