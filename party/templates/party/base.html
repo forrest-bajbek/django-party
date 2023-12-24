@@ -8,6 +8,7 @@
     <title>Party!</title>
     <script type="text/javascript" src="{% static '/party/js/htmx.min.js' %}"></script>
     <script type="text/javascript" src="{% static '/party/js/alpine.min.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'party/js/remove-me.js' %}"></script>
     {% tailwind_css %}
 </head>
 <body class="bg-custom-powder-light" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
