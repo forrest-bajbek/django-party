@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import QueryDict
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.views.generic import DetailView
 
 from party.forms import PartyForm
 from party.models import Party
+
 
 class PartyDetailPage(LoginRequiredMixin, DetailView):
     model = Party
@@ -15,7 +16,6 @@ class PartyDetailPage(LoginRequiredMixin, DetailView):
 
 
 class PartyDetailPartial(LoginRequiredMixin, View):
-
     def get(self, request, party_uuid, *args, **kwargs):
         party = get_object_or_404(Party, uuid=party_uuid)
         form = PartyForm(instance=party)

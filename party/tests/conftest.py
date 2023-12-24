@@ -3,11 +3,13 @@ import datetime
 import pytest
 from django.test import Client
 
-from party.models import Party, Gift, Guest
+from party.models import Gift, Guest, Party
+
 
 @pytest.fixture(scope="function")
 def create_user(django_user_model):
     return django_user_model.objects.create_user(username="testuser", password="123456")
+
 
 @pytest.fixture(scope="session")
 def authenticated_client():
@@ -18,6 +20,7 @@ def authenticated_client():
 
     return _authenticated_client
 
+
 @pytest.fixture(scope="session")
 def create_party():
     def _create_party(organizer, **kwargs):
@@ -27,7 +30,9 @@ def create_party():
             party_time=kwargs.get("party_time", datetime.datetime.now()),
             venue=kwargs.get("venue", "Amazing castle"),
         )
+
     return _create_party
+
 
 @pytest.fixture(scope="session")
 def create_gift():
@@ -40,6 +45,7 @@ def create_gift():
         )
 
     return _create_gift
+
 
 @pytest.fixture(scope="session")
 def create_guest():

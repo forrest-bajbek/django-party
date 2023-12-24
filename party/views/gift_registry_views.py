@@ -1,11 +1,12 @@
 from django.http import QueryDict
 from django.shortcuts import get_object_or_404, render
 from django.views import View
-from django.views.generic import DetailView, ListView
 from django.views.decorators.http import require_http_methods
+from django.views.generic import DetailView, ListView
 
 from party.forms import GiftForm
 from party.models import Gift, Party
+
 
 class GiftRegistryPage(ListView):
     model = Gift
@@ -62,6 +63,7 @@ class GiftUpdateFormPartial(View):
             {"form": form, "gift": gift},
         )
 
+
 @require_http_methods(["DELETE"])
 def delete_gift_partial(request, gift_uuid):
     gift = get_object_or_404(Gift, uuid=gift_uuid)
@@ -71,13 +73,12 @@ def delete_gift_partial(request, gift_uuid):
 
 
 class GiftCreateFormPartial(View):
-
     def get(self, request, party_uuid, *args, **kwargs):
         form = GiftForm()
         return render(
             request,
             "party/gift_registry/partial_gift_new.html",
-            {"form": form, "party_id": party_uuid}
+            {"form": form, "party_id": party_uuid},
         )
 
     def post(self, request, party_uuid, *args, **kwargs):

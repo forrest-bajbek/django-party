@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from django import forms
 from django.urls import reverse_lazy
 
-from .models import Party, Gift
+from .models import Gift, Party
 
 
 class PartyForm(forms.ModelForm):
@@ -51,7 +51,6 @@ class PartyForm(forms.ModelForm):
 
 
 class GiftForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

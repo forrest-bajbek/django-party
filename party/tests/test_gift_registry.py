@@ -80,13 +80,8 @@ def test_partial_gift_update_updates_gift_and_returns_its_details_including_part
     )
 
     url = reverse("partial_gift_update", args=[gift.uuid])
-    response = (
-        authenticated_client(create_user)
-        .put(
-            url,
-            content_type="application/json",
-            data=data
-        )
+    response = authenticated_client(create_user).put(
+        url, content_type="application/json", data=data
     )
 
     assert Gift.objects.get(uuid=gift.uuid).gift == "Updated gift"
@@ -129,6 +124,7 @@ def test_get_partial_new_gift_returns_create_gift_form_with_party(
     assert "form" in response.context
     assert not response.context["form"].is_bound
     assert response.context["party_id"] == party.uuid
+
 
 def test_put_partial_new_gift_saves_gift(
     authenticated_client,

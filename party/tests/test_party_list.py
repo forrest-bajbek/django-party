@@ -3,12 +3,10 @@ import datetime
 import pytest
 from django.urls import reverse
 
+
 @pytest.mark.django_db
 def test_party_list_page_returns_list_of_users_future_parties(
-    authenticated_client,
-    create_user,
-    create_party,
-    django_user_model
+    authenticated_client, create_user, create_party, django_user_model
 ):
     today = datetime.date.today()
     user = create_user
