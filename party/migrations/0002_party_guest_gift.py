@@ -18,9 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "uuid",
-                    models.UUIDField(
-                        default=uuid.uuid4, primary_key=True, serialize=False
-                    ),
+                    models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False),
                 ),
                 ("party_date", models.DateField()),
                 ("party_time", models.TimeField()),
@@ -44,9 +42,7 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "uuid",
-                    models.UUIDField(
-                        default=uuid.uuid4, primary_key=True, serialize=False
-                    ),
+                    models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False),
                 ),
                 ("name", models.CharField(max_length=200)),
                 ("attending", models.BooleanField(default=False)),
@@ -65,18 +61,14 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "uuid",
-                    models.UUIDField(
-                        default=uuid.uuid4, primary_key=True, serialize=False
-                    ),
+                    models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False),
                 ),
                 ("gift", models.CharField(max_length=200)),
                 ("price", models.FloatField(blank=True, null=True)),
                 ("link", models.URLField(blank=True, null=True)),
                 (
                     "party",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="party.party"
-                    ),
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="party.party"),
                 ),
             ],
         ),
