@@ -7,6 +7,7 @@ from .gift_registry_views import (
 )
 from .guest_list_views import (
     GuestListPage,
+    filter_guests_partial,
     mark_attending_partial,
     mark_not_attending_partial,
 )
@@ -33,4 +34,5 @@ __all__ = [
     "GuestListPage",
     "mark_attending_partial",
     "mark_not_attending_partial",
+    "filter_guests_partial",
 ]

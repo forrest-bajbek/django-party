@@ -80,9 +80,7 @@ def test_partial_gift_update_updates_gift_and_returns_its_details_including_part
     )
 
     url = reverse("partial_gift_update", args=[gift.uuid])
-    response = authenticated_client(create_user).put(
-        url, content_type="application/json", data=data
-    )
+    response = authenticated_client(create_user).put(url, content_type="application/json", data=data)
 
     assert Gift.objects.get(uuid=gift.uuid).gift == "Updated gift"
     assert Gift.objects.get(uuid=gift.uuid).price == 50.0
