@@ -89,7 +89,10 @@ def filter_guests_partial(request, party_uuid):
     attending_filter = request.POST.get("attending_filter")
     search_text = request.POST.get("guest_search")
 
-    query_filter = QUERY_FILTERS.get((attending_filter, bool(search_text)), filter_default)
+    query_filter = QUERY_FILTERS.get(
+        (attending_filter, bool(search_text)),
+        filter_default,
+    )
 
     guests = query_filter(party_id=party_uuid, search_text=search_text)
 

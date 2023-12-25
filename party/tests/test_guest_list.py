@@ -47,8 +47,8 @@ def test_mark_guest_attending(
         content_type="application/x-www-form-urlencoded",
     )
 
-    assert Guest.objects.get(uuid=guest_1.uuid).attending == True
-    assert Guest.objects.get(uuid=guest_2.uuid).attending == False
+    assert Guest.objects.get(uuid=guest_1.uuid).attending is True
+    assert Guest.objects.get(uuid=guest_2.uuid).attending is False
     assert response.status_code == 200
     assert len(list(response.context["guests"])) == 2
 
@@ -72,8 +72,8 @@ def test_mark_guest_not_attending(
         content_type="application/x-www-form-urlencoded",
     )
 
-    assert Guest.objects.get(uuid=guest_1.uuid).attending == False
-    assert Guest.objects.get(uuid=guest_2.uuid).attending == True
+    assert Guest.objects.get(uuid=guest_1.uuid).attending is False
+    assert Guest.objects.get(uuid=guest_2.uuid).attending is True
     assert response.status_code == 200
     assert len(list(response.context["guests"])) == 2
 
@@ -85,18 +85,48 @@ def test_mark_guest_not_attending(
         (True, "be", "all", 0),  # should pass, this is the same as before
         (True, "be", "attending", 0),  # should pass since search doesn't match
         (True, "be", "not_attending", 0),  # should pass since search doesn't match
-        (True, "an", "attending", 1),  # should pass since search matches and status isn't checked
-        (True, "an", "not_attending", 0),  # should fail since search matches but filter doesn't
+        (
+            True,
+            "an",
+            "attending",
+            1,
+        ),  # should pass since search matches and status isn't checked
+        (
+            True,
+            "an",
+            "not_attending",
+            0,
+        ),  # should fail since search matches but filter doesn't
         (True, "", "attending", 1),  # should pass since empty search matches the result
-        (True, "", "not_attending", 0),  # should fail, since search matches, but filter doesn't
+        (
+            True,
+            "",
+            "not_attending",
+            0,
+        ),  # should fail, since search matches, but filter doesn't
         (False, "an", "all", 1),  # should pass since filter is "all"
         (False, "be", "all", 0),  # should pass since filter is "all"
         (False, "be", "attending", 0),  # should pass since search doesn't match
         (False, "be", "not_attending", 0),  # should pass since search doesn't match
-        (False, "an", "attending", 0),  # should fail since "an" matches, but "attending" shouldn't
-        (False, "an", "not_attending", 1),  # should pass since filter matches even if not checked
+        (
+            False,
+            "an",
+            "attending",
+            0,
+        ),  # should fail since "an" matches, but "attending" shouldn't
+        (
+            False,
+            "an",
+            "not_attending",
+            1,
+        ),  # should pass since filter matches even if not checked
         (False, "", "attending", 0),  # should fail since filter doesn't match output
-        (False, "", "not_attending", 1),  # should pass since filter matches output even if not checked
+        (
+            False,
+            "",
+            "not_attending",
+            1,
+        ),  # should pass since filter matches output even if not checked
     ],
 )
 def test_filter_guest_by_status_and_search(
